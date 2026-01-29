@@ -1,65 +1,63 @@
-import Image from "next/image";
+import { getCategories } from '@/lib/catalog';
+import Link from 'next/link';
+import Image from 'next/image';
 
-export default function Home() {
+export default async function Home() {
+  const categories = await getCategories();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen p-6 md:p-12 lg:p-24 bg-neutral-950 text-white selection:bg-amber-500/30">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-20 text-center animate-fade-in-up">
+          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6 tracking-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600">
+              Catálogo Exclusivo
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-neutral-400 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
+            Descubre nuestra colección de piezas únicas diseñadas para resaltar tu elegancia.
           </p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {categories.map((category) => (
+            <Link
+              key={category.slug}
+              href={`/${category.slug}`}
+              className="group relative block aspect-[4/5] md:aspect-square lg:aspect-[4/3] overflow-hidden rounded-xl bg-neutral-900 shadow-2xl ring-1 ring-white/10 transition-transform duration-500 hover:-translate-y-2"
+            >
+              {category.previewImage ? (
+                <div className="absolute inset-0">
+                  <Image
+                    src={category.previewImage}
+                    alt={category.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
+                  <span className="text-neutral-700">Sin imagen de portada</span>
+                </div>
+              )}
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+
+              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+                <h2 className="text-3xl font-bold mb-2 text-white font-serif tracking-wide border-l-4 border-amber-500 pl-4">
+                  {category.name}
+                </h2>
+                <div className="pl-5 overflow-hidden h-0 group-hover:h-8 transition-[height] duration-500">
+                  <span className="text-sm text-amber-300 font-medium uppercase tracking-widest">
+                    {category.imageCount} diseños disponibles
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
