@@ -42,13 +42,33 @@ export default async function Home() {
                 </div>
               )}
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 md:opacity-0 md:group-hover:opacity-80 transition-opacity duration-500" />
 
-              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-2 transition-transform duration-500 group-hover:translate-y-0">
+              {/* Text content */}
+              <div
+                className="
+                  absolute bottom-0 left-0 p-8 w-full
+                  translate-y-0
+                  md:translate-y-6
+                  transition-transform duration-500
+                  md:group-hover:translate-y-0
+                "
+              >
                 <h2 className="text-3xl font-bold mb-2 text-white font-serif tracking-wide border-l-4 border-amber-500 pl-4">
                   {category.name}
                 </h2>
-                <div className="pl-5 overflow-hidden h-0 group-hover:h-8 transition-[height] duration-500">
+
+                <div
+                  className="
+                    pl-5
+                    h-8
+                    md:h-0
+                    overflow-hidden
+                    transition-[height] duration-500
+                    md:group-hover:h-8
+                  "
+                >
                   <span className="text-sm text-amber-300 font-medium uppercase tracking-widest">
                     {category.imageCount} diseños disponibles
                   </span>
