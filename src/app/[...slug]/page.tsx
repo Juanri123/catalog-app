@@ -118,8 +118,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                                 </div>
 
-                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                    <p className="text-md font-medium text-white truncate border-l-2 border-amber-500 pl-3">
+                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-4 md:p-6 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 z-20">
+                                    <p className="text-sm md:text-md font-medium text-white truncate border-l-2 border-amber-500 pl-3">
                                         {img.name}
                                     </p>
                                 </div>

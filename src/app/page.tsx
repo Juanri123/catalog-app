@@ -42,20 +42,21 @@ export default async function Home() {
                 </div>
               )}
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 md:opacity-0 md:group-hover:opacity-80 transition-opacity duration-500" />
+              {/* Overlay - Z-index fixed */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 md:opacity-0 md:group-hover:opacity-80 transition-opacity duration-500 z-10" />
 
-              {/* Text content */}
+              {/* Text content - Z-index fixed and mobile adjustments */}
               <div
                 className="
-                  absolute bottom-0 left-0 p-8 w-full
+                  absolute bottom-0 left-0 w-full z-20
+                  p-6 md:p-8
                   translate-y-0
                   md:translate-y-6
                   transition-transform duration-500
                   md:group-hover:translate-y-0
                 "
               >
-                <h2 className="text-3xl font-bold mb-2 text-white font-serif tracking-wide border-l-4 border-amber-500 pl-4">
+                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-white font-serif tracking-wide border-l-4 border-amber-500 pl-4">
                   {category.name}
                 </h2>
 
